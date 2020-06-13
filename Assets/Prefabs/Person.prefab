@@ -135,9 +135,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   infectionDistance: 1
-  infectionProbability: 0.2
-  infectionCooldown: 1
+  infectionProbability: 0.1
+  infectionCooldown: 0.5
   timeToHealthy: 5
+  travelCheckCooldown: 1
+  lastTravelCheck: 0
   travelProbability: 0.01
   patch: {fileID: 0}
   personSprite: {fileID: 21300000, guid: ca06a59ec558ff94596d422983888e5b, type: 3}
@@ -146,3 +148,5 @@ MonoBehaviour:
   removedPersonSprite: {fileID: 21300000, guid: 4c87b8c40cb12be4599d61afbacf1b68,
     type: 3}
   infectionState: 0
+  movementState: 0
+  traveledToPosition: {x: 0, y: 0, z: 0}

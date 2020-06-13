@@ -24,8 +24,6 @@ public class patch : MonoBehaviour
         float peoplePerRow = peopleCount / rowsCount;
         float distBetweenX = patchWidth / (peoplePerRow + 1);
         float distBetweenY = -patchHeight / (rowsCount + 1);
-        int patientZeroIndex = UnityEngine.Random.Range(0, peopleCount - 1);
-        int currentPersonIndex = 0;
         people = new List<Person>();
 
         for(int i = 0; i < rowsCount; i++)
@@ -36,14 +34,7 @@ public class patch : MonoBehaviour
                 Person newPerson = Instantiate(personPrefab, position, Quaternion.identity).GetComponent<Person>();
                 newPerson.transform.SetParent(peopleHolder, false);
                 newPerson.patch = this;
-
-                if (currentPersonIndex == patientZeroIndex)
-                {
-                    newPerson.MakeInfected();
-                }
-
                 people.Add(newPerson);
-                currentPersonIndex++;
             }
         }
     }
