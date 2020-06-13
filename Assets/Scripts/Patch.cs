@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class patch : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class patch : MonoBehaviour
 
     public GameObject personPrefab;
     public Transform peopleHolder;
+    public Text statsText;
+
+    private List<Person> people;
 
     void Start()
     {
@@ -19,6 +24,7 @@ public class patch : MonoBehaviour
         float distBetweenY = -patchHeight / (rowsCount + 1);
         int patientZeroIndex = UnityEngine.Random.Range(0, peopleCount - 1);
         int currentPersonIndex = 0;
+        people = new List<Person>();
 
         Debug.Log("Infected person is " + patientZeroIndex);
         
@@ -35,6 +41,7 @@ public class patch : MonoBehaviour
                     newPerson.MakeInfected();
                 }
 
+                people.Add(newPerson);
                 currentPersonIndex++;
             }
         }
@@ -42,6 +49,17 @@ public class patch : MonoBehaviour
 
     void Update()
     {
-        
+        UpdateStats();
+    }
+
+    void UpdateStats()
+    {
+        int susceptibleCount = people.FindAll(p => p.infectionState == Person.InfectionState.Susceptible).Count;
+        int infectedCount = people.FindAll(p => p.infectionState == Person.InfectionState.Infected).Count;
+        int removedCount = people.FindAll(p => p.infectionState == Person.InfectionState.Removed).Count;
+
+        statsText.text = "Susceptible: " + susceptibleCount +
+                       "\nInfected: " + infectedCount +
+                       "\nRemoved: " + removedCount;
     }
 }
