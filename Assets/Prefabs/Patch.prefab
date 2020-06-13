@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8456788656908250630}
   - component: {fileID: 3181177111577902944}
   - component: {fileID: 7393312586785960427}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 139369f92052cad4eba9ee1d75dbea1f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 3137013607687068046}
   - component: {fileID: 6791465102889313432}
   - component: {fileID: 3351750684745379402}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bottom Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 139369f92052cad4eba9ee1d75dbea1f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 5703593176883894803}
   - component: {fileID: 6506568410713857138}
   - component: {fileID: 9074594730266932095}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 139369f92052cad4eba9ee1d75dbea1f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -390,6 +390,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
+--- !u!1 &8790127826274448070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1256727220721164830}
+  m_Layer: 9
+  m_Name: People
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1256727220721164830
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790127826274448070}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9201869369661390308}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9201869369606101433
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +432,7 @@ GameObject:
   - component: {fileID: 9201869369606101435}
   - component: {fileID: 9201869369606101436}
   - component: {fileID: 9201869369606101437}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Top Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +519,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 139369f92052cad4eba9ee1d75dbea1f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -530,7 +560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9201869369661390308}
   - component: {fileID: -1440156746859610212}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Patch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,6 +582,7 @@ Transform:
   - {fileID: 8056690742685443953}
   - {fileID: 7641261899099340648}
   - {fileID: 6706001117732967504}
+  - {fileID: 1256727220721164830}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -571,3 +602,4 @@ MonoBehaviour:
   rowsCount: 4
   personPrefab: {fileID: 4540354312945990616, guid: b851d628e31359e4c93ac69159b146f4,
     type: 3}
+  peopleHolder: {fileID: 1256727220721164830}

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4540354312945990618}
   - component: {fileID: 4540354312945990617}
   - component: {fileID: 4464890501441461504}
-  m_Layer: 0
+  - component: {fileID: 2521342022113132650}
+  m_Layer: 8
   m_Name: Person
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,9 +98,9 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 139369f92052cad4eba9ee1d75dbea1f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -120,3 +121,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &2521342022113132650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540354312945990616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 300a6277858681a459ce92e875eeb421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  force: {x: 0, y: 0}
