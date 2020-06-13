@@ -15,6 +15,8 @@ public class patch : MonoBehaviour
     public Transform peopleHolder;
     public Text statsText;
 
+    public Transform center;
+
     private List<Person> people;
 
     void Start()
@@ -26,8 +28,6 @@ public class patch : MonoBehaviour
         int currentPersonIndex = 0;
         people = new List<Person>();
 
-        Debug.Log("Infected person is " + patientZeroIndex);
-        
         for(int i = 0; i < rowsCount; i++)
         {
             for(int j = 0; j < peoplePerRow; j++)
@@ -35,6 +35,7 @@ public class patch : MonoBehaviour
                 Vector3 position = new Vector3(distBetweenX * j - patchWidth * 0.4f, distBetweenY * i - 0.4f, 0);
                 Person newPerson = Instantiate(personPrefab, position, Quaternion.identity).GetComponent<Person>();
                 newPerson.transform.SetParent(peopleHolder, false);
+                newPerson.patch = this;
 
                 if (currentPersonIndex == patientZeroIndex)
                 {

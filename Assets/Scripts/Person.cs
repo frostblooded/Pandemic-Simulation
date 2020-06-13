@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
@@ -14,7 +15,14 @@ public class Person : MonoBehaviour
         Removed
     }
 
+    public enum MovementState
+    {
+        Normal,
+        Travel
+    }
+
     private Rigidbody2D rigidBody;
+    private CircleCollider2D circleCollider;
     private SpriteRenderer spriteRenderer;
     private float lastInfection;
     private float infectedTime;
@@ -25,24 +33,36 @@ public class Person : MonoBehaviour
     public float infectionCooldown = 1;
     public float timeToHealthy = 5;
 
+    public float travelCheckCooldown = 1;
+    public float lastTravelCheck;
+    public float travelProbability = 0.01f;
+
+    [HideInInspector]
+    public patch patch;
+
     public Sprite personSprite;
     public Sprite infectedPersonSprite;
     public Sprite removedPersonSprite;
 
     public InfectionState infectionState;
+    public MovementState movementState;
+    public Vector3 traveledToPosition;
 
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        circleCollider = GetComponent<CircleCollider2D>();
 
-        Vector2 force = Random.insideUnitCircle.normalized;
-        rigidBody.AddForce(force * speed, ForceMode2D.Impulse);
+        AddStartingForce();
+        movementState = MovementState.Normal;
+
         MakeSusceptible();
         lastInfection = Time.time + infectionCooldown;
+        lastTravelCheck = Time.time + travelCheckCooldown;
     }
 
-    void Update()
+    void NormalUpdate()
     {
         if(CanInfect())
         {
@@ -54,6 +74,42 @@ public class Person : MonoBehaviour
         {
             MakeRemoved();
         }
+
+        if (lastTravelCheck + travelCheckCooldown < Time.time)
+        {
+            if(UnityEngine.Random.Range(0f, 1f) < travelProbability)
+            {
+                StartTravel();
+            }
+
+            lastTravelCheck = Time.time;
+        }
+    }
+
+    void TravelUpdate()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, traveledToPosition, speed * Time.deltaTime);
+
+        if(Vector3.Distance(transform.position, traveledToPosition) < Mathf.Epsilon)
+        {
+            EndTravel();
+        }
+    }
+
+    void Update()
+    {
+        if(movementState == MovementState.Normal)
+        {
+            NormalUpdate();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if(movementState == MovementState.Travel)
+        {
+            TravelUpdate();
+        }
     }
 
     public void InfectNearby()
@@ -63,9 +119,15 @@ public class Person : MonoBehaviour
         List<Person> peopleToInfect = people.ToList()
                                             .FindAll(p => p.infectionState == InfectionState.Susceptible)
                                             .FindAll(p => Vector3.Distance(p.transform.position, this.transform.position) < infectionDistance)
-                                            .FindAll(p => Random.Range(0f, 1f) < infectionProbability);
+                                            .FindAll(p => UnityEngine.Random.Range(0f, 1f) < infectionProbability);
         peopleToInfect.ForEach(p => p.MakeInfected());
-        lastInfection = Time.time + Random.Range(0f, 1f);
+        lastInfection = Time.time + UnityEngine.Random.Range(0f, 1f);
+    }
+
+    private void AddStartingForce()
+    {
+        Vector2 force = UnityEngine.Random.insideUnitCircle.normalized;
+        rigidBody.AddForce(force * speed, ForceMode2D.Impulse);
     }
 
     public void MakeSusceptible()
@@ -91,5 +153,29 @@ public class Person : MonoBehaviour
     {
         return infectionState == InfectionState.Infected
             && lastInfection + infectionCooldown < Time.time;
+    }
+
+    private void StartTravel()
+    {
+        List<patch> otherPatches = FindObjectsOfType<patch>().ToList().FindAll(p => p != this.patch);
+        
+        if(otherPatches.Count == 0)
+        {
+            return;
+        }
+
+        traveledToPosition = otherPatches[UnityEngine.Random.Range(0, otherPatches.Count - 1)].center.position;
+        Debug.Log("Travel from patch " + this.patch + " to position " + traveledToPosition);
+
+        movementState = MovementState.Travel;
+        rigidBody.velocity = Vector2.zero;
+        circleCollider.enabled = false;
+    }
+
+    private void EndTravel()
+    {
+        circleCollider.enabled = true;
+        movementState = MovementState.Normal;
+        AddStartingForce();
     }
 }
