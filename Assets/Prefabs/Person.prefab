@@ -135,8 +135,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   infectionDistance: 1
-  infectionProbability: 0.1
-  infectionCooldown: 0.5
+  infectionProbability: 0.2
+  infectionCooldown: 1
   timeToHealthy: 5
   travelCheckCooldown: 1
   lastTravelCheck: 0

@@ -90,7 +90,7 @@ public class Person : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, traveledToPosition, speed * Time.deltaTime);
 
-        if(Vector3.Distance(transform.position, traveledToPosition) < Mathf.Epsilon)
+        if(Vector3.Distance(transform.position, traveledToPosition) < 1f)
         {
             EndTravel();
         }
