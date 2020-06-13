@@ -8,7 +8,7 @@ public class FirstInfector : MonoBehaviour
 
     void Update()
     {
-        if(Time.time > timeBeforeFirstInfection)
+        if(Time.timeSinceLevelLoad > timeBeforeFirstInfection)
         {
             Person[] people = FindObjectsOfType<Person>();
             int infectedIndex = Random.Range(0, people.Length - 1);

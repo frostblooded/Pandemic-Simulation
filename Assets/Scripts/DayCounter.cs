@@ -9,6 +9,6 @@ public class DayCounter : MonoBehaviour
 
     void Update()
     {
-        text.text = "Day: " + Mathf.FloorToInt(Time.time);
+        text.text = "Day: " + Mathf.FloorToInt(Time.timeSinceLevelLoad);
     }
 }

@@ -58,8 +58,8 @@ public class Person : MonoBehaviour
         movementState = MovementState.Normal;
 
         MakeSusceptible();
-        lastInfection = Time.time + infectionCooldown;
-        lastTravelCheck = Time.time + travelCheckCooldown;
+        lastInfection = Time.timeSinceLevelLoad + infectionCooldown;
+        lastTravelCheck = Time.timeSinceLevelLoad + travelCheckCooldown;
     }
 
     void NormalUpdate()
@@ -70,19 +70,19 @@ public class Person : MonoBehaviour
         }
 
         if(infectionState == InfectionState.Infected
-            && infectedTime + timeToHealthy < Time.time)
+            && infectedTime + timeToHealthy < Time.timeSinceLevelLoad)
         {
             MakeRemoved();
         }
 
-        if (lastTravelCheck + travelCheckCooldown < Time.time)
+        if (lastTravelCheck + travelCheckCooldown < Time.timeSinceLevelLoad)
         {
             if(UnityEngine.Random.Range(0f, 1f) < travelProbability)
             {
                 StartTravel();
             }
 
-            lastTravelCheck = Time.time;
+            lastTravelCheck = Time.timeSinceLevelLoad;
         }
     }
 
@@ -121,7 +121,7 @@ public class Person : MonoBehaviour
                                             .FindAll(p => Vector3.Distance(p.transform.position, this.transform.position) < infectionDistance)
                                             .FindAll(p => UnityEngine.Random.Range(0f, 1f) < infectionProbability);
         peopleToInfect.ForEach(p => p.MakeInfected());
-        lastInfection = Time.time + UnityEngine.Random.Range(0f, 1f);
+        lastInfection = Time.timeSinceLevelLoad + UnityEngine.Random.Range(0f, 1f);
     }
 
     private void AddStartingForce()
@@ -140,7 +140,7 @@ public class Person : MonoBehaviour
     {
         infectionState = InfectionState.Infected;
         spriteRenderer.sprite = infectedPersonSprite;
-        infectedTime = Time.time;
+        infectedTime = Time.timeSinceLevelLoad;
     }
 
     public void MakeRemoved()
@@ -152,7 +152,7 @@ public class Person : MonoBehaviour
     private bool CanInfect()
     {
         return infectionState == InfectionState.Infected
-            && lastInfection + infectionCooldown < Time.time;
+            && lastInfection + infectionCooldown < Time.timeSinceLevelLoad;
     }
 
     private void StartTravel()
