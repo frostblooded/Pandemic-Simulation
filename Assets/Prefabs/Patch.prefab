@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7203430c4e97e8f478e1f6e6c23a9a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  peopleCount: 100
+  peopleCount: 50
   rowsCount: 10
   patchHeight: 8
   patchWidth: 8

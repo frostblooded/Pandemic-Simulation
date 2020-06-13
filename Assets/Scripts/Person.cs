@@ -9,13 +9,10 @@ public class Person : MonoBehaviour
 
     public float speed = 1;
 
-    [ReadOnly]
-    public Vector2 force;
-
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        force = Random.insideUnitCircle.normalized;
+        Vector2 force = Random.insideUnitCircle.normalized;
         rigidBody.AddForce(force * speed, ForceMode2D.Impulse);
     }
 
