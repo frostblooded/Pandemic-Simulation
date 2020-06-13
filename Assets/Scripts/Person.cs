@@ -17,13 +17,18 @@ public class Person : MonoBehaviour
     private Rigidbody2D rigidBody;
     private SpriteRenderer spriteRenderer;
     private float lastInfection;
+    private float infectedTime;
 
     public float speed = 1;
     public float infectionDistance = 1;
     public float infectionProbability = 0.2f;
     public float infectionCooldown = 1;
-    public Sprite infectedPersonSprite;
+    public float timeToHealthy = 5;
+
     public Sprite personSprite;
+    public Sprite infectedPersonSprite;
+    public Sprite removedPersonSprite;
+
     public InfectionState infectionState;
 
     void Awake()
@@ -43,24 +48,23 @@ public class Person : MonoBehaviour
         {
             InfectNearby();
         }
+
+        if(infectionState == InfectionState.Infected
+            && infectedTime + timeToHealthy < Time.time)
+        {
+            MakeRemoved();
+        }
     }
 
     public void InfectNearby()
     {
         Person[] people = FindObjectsOfType<Person>();
 
-        // Get the people that aren't infected, are in infection range, and pass
-        // the infection probability check
         List<Person> peopleToInfect = people.ToList()
-                                            .FindAll(p => p.infectionState != InfectionState.Infected)
+                                            .FindAll(p => p.infectionState == InfectionState.Susceptible)
                                             .FindAll(p => Vector3.Distance(p.transform.position, this.transform.position) < infectionDistance)
                                             .FindAll(p => Random.Range(0f, 1f) < infectionProbability);
-
-        foreach(Person person in peopleToInfect)
-        {
-            person.MakeInfected();
-        }
-
+        peopleToInfect.ForEach(p => p.MakeInfected());
         lastInfection = Time.time + Random.Range(0f, 1f);
     }
 
@@ -74,6 +78,13 @@ public class Person : MonoBehaviour
     {
         infectionState = InfectionState.Infected;
         spriteRenderer.sprite = infectedPersonSprite;
+        infectedTime = Time.time;
+    }
+
+    public void MakeRemoved()
+    {
+        infectionState = InfectionState.Removed;
+        spriteRenderer.sprite = removedPersonSprite;
     }
 
     private bool CanInfect()
