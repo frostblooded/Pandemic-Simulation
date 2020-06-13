@@ -529,6 +529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9201869369661390308}
+  - component: {fileID: -1440156746859610212}
   m_Layer: 0
   m_Name: Patch
   m_TagString: Untagged
@@ -554,3 +555,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1440156746859610212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9201869369661390307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7203430c4e97e8f478e1f6e6c23a9a26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peopleCount: 16
+  rowsCount: 4
+  personPrefab: {fileID: 4540354312945990616, guid: b851d628e31359e4c93ac69159b146f4,
+    type: 3}
