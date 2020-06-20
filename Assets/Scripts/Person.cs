@@ -58,7 +58,6 @@ public class Person : MonoBehaviour
         movementState = MovementState.Normal;
 
         MakeSusceptible();
-        lastInfection = Time.timeSinceLevelLoad + infectionCooldown;
         lastTravelCheck = Time.timeSinceLevelLoad + travelCheckCooldown;
     }
 
@@ -141,6 +140,9 @@ public class Person : MonoBehaviour
         infectionState = InfectionState.Infected;
         spriteRenderer.sprite = infectedPersonSprite;
         infectedTime = Time.timeSinceLevelLoad;
+
+        // Let's not infect immediately
+        lastInfection = Time.timeSinceLevelLoad + infectionCooldown;
     }
 
     public void MakeRemoved()
