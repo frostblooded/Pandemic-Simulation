@@ -140,7 +140,7 @@ MonoBehaviour:
   timeToHealthy: 5
   travelCheckCooldown: 1
   lastTravelCheck: 0
-  travelProbability: 0.01
+  travelProbability: 0.05
   patch: {fileID: 0}
   personSprite: {fileID: 21300000, guid: ca06a59ec558ff94596d422983888e5b, type: 3}
   infectedPersonSprite: {fileID: 21300000, guid: e5cdf6066bd0503439d9f688aae2f440,
